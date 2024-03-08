@@ -17,14 +17,17 @@ async function criaVideo(titulo, descricao, url, imagem){
             imagem: imagem
         })
     });
+    if(!conexao.ok){
+        throw new Error("Não foi possivel criar o video");
+    }
 
     const conexaoConvertida = await conexao.json();
     return conexaoConvertida;
 }
 
 async function buscaVideo(termodeBusca){
-    console.log(termodeBusca);
     const conexao = await fetch(`http://localhost:3000/videos?q=${termodeBusca}`)
+    console.log(conexao);
     const conexaoConvertida = conexao.json();
 
     return conexaoConvertida;
